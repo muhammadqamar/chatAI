@@ -27,7 +27,7 @@ const ExtinguishForm = ({ setShowPolicies, allPolices, setAllPolices }: any) => 
     accrual_cycle: '',
     cycle_on_employment_start: '',
     policy_duration: '',
-    upfront_allocation: false,
+    upfront_allocation: '',
     allowance_type_id: '',
     policy_start_date: '',
   };
