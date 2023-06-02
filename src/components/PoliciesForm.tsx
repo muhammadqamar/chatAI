@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 
-import { PolicyInput2 } from './PolicyInput';
+
 import ExtinguishForm from './Form/extinguishForm';
 import BerechnenForm from './Form/berechnenForm';
 
