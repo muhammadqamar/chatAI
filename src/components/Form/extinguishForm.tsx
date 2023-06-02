@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 
+
 interface MyFormValues {
   policyId: string;
   policyName: string;
@@ -17,7 +18,7 @@ interface Errors {
   [key: string]: string;
 }
 
-const ExtinguishForm = ({ setShowPolicies }: any) => {
+const ExtinguishForm = ({ setShowPolicies, allPolices, setAllPolices }: any) => {
   const initialValues: MyFormValues = {
     policyId: '',
     policyName: '',
@@ -33,7 +34,7 @@ const ExtinguishForm = ({ setShowPolicies }: any) => {
   return (
     <div>
       <div className="flex_box">
-        <p className="heading">Policy 1</p>
+        <p className="heading">Policy {allPolices.length}</p>
         <button
           className="button cancel-btn"
           type="button"
@@ -68,22 +69,14 @@ const ExtinguishForm = ({ setShowPolicies }: any) => {
           if (!values.policy_start_date) {
             errors.policy_start_date = 'Required';
           }
-          if (!values.accrual_cycle) {
-            errors.accrual_cycle = 'Required';
-          }
-          if (!values.cycle_on_employment_start) {
-            errors.cycle_on_employment_start = 'Required';
-          }
-          if (!values.upfront_allocation) {
-            errors.upfront_allocation = 'Required';
-          }
+
+
+
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          setAllPolices([...allPolices, {...values, id :  new Date()?.toISOString()}])
+          setShowPolicies(false)
         }}
       >
         {({
@@ -258,6 +251,7 @@ const ExtinguishForm = ({ setShowPolicies }: any) => {
                 </p>
               </div>
             </div>
+            <br />
             <button
               className="button full-width"
               type="submit"

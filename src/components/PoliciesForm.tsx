@@ -1,10 +1,7 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 
-import {
-  CalculatePoliciesReturnType,
-  calculatePolicies,
-} from '../lib/allowance';
+
 import { PolicyInput2 } from './PolicyInput';
 import ExtinguishForm from './Form/extinguishForm';
 import BerechnenForm from './Form/berechnenForm';
@@ -17,13 +14,9 @@ export default function () {
   const [showPolicies, setShowPolicies] = React.useState(false);
   const [inputDate, setInputDate] = React.useState(new Date());
 
-  const [result, setResult] =
-    React.useState<CalculatePoliciesReturnType | null>(null);
+  const [allPolices, setAllPolices] = useState([])
 
-  const handleSubmit = () => {
-    const result = calculatePolicies(policies, workspace, inputDate);
-    setResult(result);
-  };
+
   // const addPolicy = () => (
 
   //   setPolicies((old) => [
@@ -46,7 +39,7 @@ export default function () {
 
   return (
     <div>
-      <h2 className="heading">Eingabeformular</h2>
+      <h2 className="heading">Form</h2>
       {/* <form onSubmit={handleSubmit}>
         {policies.map((policy, i) => (
           <PolicyInput2
@@ -79,10 +72,12 @@ export default function () {
       </form> */}
 
       <div className="forms_section">
-        <div className="">
-          <BerechnenForm setShowPolicies={setShowPolicies} />
+        <div className="right">
+          <BerechnenForm setAllPolices={setAllPolices} setShowPolicies={setShowPolicies} allPolices={allPolices} />
         </div>
-        {showPolicies && <ExtinguishForm setShowPolicies={setShowPolicies} />}
+        <div className="left">
+        {showPolicies && <ExtinguishForm setAllPolices={setAllPolices} allPolices={allPolices} setShowPolicies={setShowPolicies} />}
+        </div>
       </div>
       {/* {result && (
         <div>
@@ -90,7 +85,7 @@ export default function () {
           <p>Policies: {result.policies}</p>
           <p>Past Allowance: {result.past_allowance}</p>
           <p>Expiration: {result.expiration}</p>
-         
+
           {result.events.map(
             (
               event: {
