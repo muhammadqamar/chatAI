@@ -16,11 +16,12 @@
   justify-content: space-between;
   gap: 30px;
   .right  {
-
+     min-width: 50%;
     flex-grow: 1;
+    width:100%
   }
   .left  {
-
+    min-width: 50%;
     flex-grow: 1;
   }
 }

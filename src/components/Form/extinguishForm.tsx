@@ -7,10 +7,10 @@ interface MyFormValues {
   policyName: string;
   accrualMonth: string;
   policyAmount: string;
-  accrual_cycle: boolean;
-  cycle_on_employment_start: boolean;
+  accrual_cycle?: string;
+  cycle_on_employment_start: string;
   policy_duration: string;
-  upfront_allocation: boolean;
+  upfront_allocation: string;
   allowance_type_id: string;
   policy_start_date: string;
 }
@@ -24,8 +24,8 @@ const ExtinguishForm = ({ setShowPolicies, allPolices, setAllPolices }: any) => 
     policyName: '',
     accrualMonth: '',
     policyAmount: '',
-    accrual_cycle: false,
-    cycle_on_employment_start: false,
+    accrual_cycle: '',
+    cycle_on_employment_start: '',
     policy_duration: '',
     upfront_allocation: false,
     allowance_type_id: '',
@@ -155,7 +155,7 @@ const ExtinguishForm = ({ setShowPolicies, allPolices, setAllPolices }: any) => 
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values?.accrual_cycle}
-                    checked={values?.accrual_cycle}
+                    checked={!!values?.accrual_cycle}
                   />
 
                   <p className="">Accrual Cycle</p>
@@ -176,7 +176,7 @@ const ExtinguishForm = ({ setShowPolicies, allPolices, setAllPolices }: any) => 
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values?.cycle_on_employment_start}
-                    checked={values?.cycle_on_employment_start}
+                    checked={!!values?.cycle_on_employment_start}
                   />
 
                   <p className="">Cycle on Employment Start</p>
@@ -210,7 +210,7 @@ const ExtinguishForm = ({ setShowPolicies, allPolices, setAllPolices }: any) => 
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values?.upfront_allocation}
-                    checked={values?.upfront_allocation}
+                    checked={!!values?.upfront_allocation}
                   />
                   <p className=""> Upfront Allocation</p>
                 </div>
