@@ -1,13 +1,12 @@
 import React from 'react';
 import { Formik } from 'formik';
 
-
 interface MyFormValues {
   policyId: string;
   policyName: string;
   accrualMonth: string;
   policyAmount: string;
-  accrual_cycle?: string;
+  accrual_cycle: string;
   cycle_on_employment_start: string;
   policy_duration: string;
   upfront_allocation: string;
@@ -18,7 +17,11 @@ interface Errors {
   [key: string]: string;
 }
 
-const ExtinguishForm = ({ setShowPolicies, allPolices, setAllPolices }: any) => {
+const ExtinguishForm = ({
+  setShowPolicies,
+  allPolices,
+  setAllPolices,
+}: any) => {
   const initialValues: MyFormValues = {
     policyId: '',
     policyName: '',
@@ -69,14 +72,17 @@ const ExtinguishForm = ({ setShowPolicies, allPolices, setAllPolices }: any) => 
           if (!values.policy_start_date) {
             errors.policy_start_date = 'Required';
           }
-
-
-
+          if (!values.accrual_cycle) {
+            errors.accrual_cycle = 'Required';
+          }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setAllPolices([...allPolices, {...values, id :  new Date()?.toISOString()}])
-          setShowPolicies(false)
+          setAllPolices([
+            ...allPolices,
+            { ...values, id: new Date()?.toISOString() },
+          ]);
+          setShowPolicies(false);
         }}
       >
         {({
@@ -147,19 +153,17 @@ const ExtinguishForm = ({ setShowPolicies, allPolices, setAllPolices }: any) => 
                     errors.policyAmount}
                 </p>
               </div>
-              <div className="">
-                <div className="input_checkbox_wrapper">
-                  <input
-                    type="checkbox"
-                    name="accrual_cycle"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values?.accrual_cycle}
-                    checked={!!values?.accrual_cycle}
-                  />
 
-                  <p className="">Accrual Cycle</p>
-                </div>
+              <div className="input_wrapper">
+                <input
+                  type="date"
+                  name="accrual_cycle"
+                  placeholder="Accrual Cycle"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values?.accrual_cycle}
+                  checked={!!values?.accrual_cycle}
+                />
 
                 <p className="error">
                   {errors.accrual_cycle &&
